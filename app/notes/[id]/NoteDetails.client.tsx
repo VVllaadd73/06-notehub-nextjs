@@ -11,10 +11,15 @@ export default function NoteDetails() {
    const params = useParams();
    const id = params.id as string;
 
-   const { data: note, isLoading, isError } = useQuery({
-      queryKey: ['note', id],
-      queryFn: () => fetchNoteId(id),
-   });
+const {
+   data: note,
+   isLoading,
+   isError,
+} = useQuery({
+   queryKey: ['notes', 'detail', id],
+   queryFn: () => fetchNoteId(id),
+   refetchOnMount: false,
+});
 
    if (isLoading) return <p>Loading, please wait...</p>;
    if (isError) return <p>Something went wrong.</p>;
